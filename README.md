@@ -27,9 +27,8 @@ A simple, mobile-first web application that allows users to write a short reflec
 
 ### Frontend Setup (React + Tailwind)
 
-1. Open terminal and navigate to the frontend folder:
+ Open terminal and navigate to the frontend folder:
 
-```bash
 cd emotion-frontend
 
 Install Dependencies - npm install
@@ -38,7 +37,7 @@ Start the development server - npm run dev
 
 -----> The frontend will run at: http://localhost:5173
 
-## Backend Setup
+### Backend Setup
 
 Create and activate a virtual environment:
 
