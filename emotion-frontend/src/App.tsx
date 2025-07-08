@@ -5,6 +5,12 @@ interface EmotionResult {
   confidence: number;
 }
 
+// ✅ Automatically switch between local & deployed backend
+const API_BASE_URL =
+  import.meta.env.MODE === 'development'
+    ? 'http://localhost:8000'
+    : 'https://emotion-backend-xzri.onrender.com';
+
 function App() {
   const [text, setText] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +25,7 @@ function App() {
     setError('');
 
     try {
-      const res = await fetch('https://emotion-backend-xzri.onrender.com/analyze', {
+      const res = await fetch(`${API_BASE_URL}/analyze`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
@@ -30,7 +36,6 @@ function App() {
       const data = await res.json();
       setResult(data);
       setText('');
-
     } catch (err) {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -57,18 +62,18 @@ function App() {
             setResult(null);
           }}
         />
+
         <button
           onClick={handleSubmit}
           disabled={loading || !text.trim()}
           className={`w-full py-3 rounded-xl font-semibold text-base transition duration-300 ease-in-out tracking-wide
-    ${loading || !text.trim()
+            ${loading || !text.trim()
               ? 'bg-gray-200 text-gray-500 cursor-not-allowed shadow-sm'
               : 'bg-gradient-to-r from-teal-400 to-cyan-500 text-white hover:from-teal-500 hover:to-cyan-600 shadow-lg hover:shadow-xl'}
-  `}
+          `}
         >
           {loading ? 'Analyzing...' : 'Reflect Emotion'}
         </button>
-
 
         {error && (
           <p className="text-red-600 text-sm text-center">{error}</p>
@@ -76,8 +81,12 @@ function App() {
 
         {result && (
           <div className="bg-teal-50 border-l-4 border-teal-400 p-4 rounded-xl text-teal-800">
-            <p className="text-lg font-medium">Detected Emotion: <span className="font-bold">{result.emotion}</span></p>
-            <p className="text-sm mt-1">Confidence: {(result.confidence * 100).toFixed(1)}%</p>
+            <p className="text-lg font-medium">
+              Detected Emotion: <span className="font-bold">{result.emotion}</span>
+            </p>
+            <p className="text-sm mt-1">
+              Confidence: {(result.confidence * 100).toFixed(1)}%
+            </p>
           </div>
         )}
       </div>
