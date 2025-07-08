@@ -24,6 +24,7 @@ A simple, mobile-first web application that allows users to write a short reflec
 
 ## Setup Instructions
 
+
 ### Frontend Setup (React + Tailwind)
 
 1. Open terminal and navigate to the frontend folder:
@@ -37,7 +38,7 @@ Start the development server - npm run dev
 
 -----> The frontend will run at: http://localhost:5173
 
-BACKEND SETUP 
+## Backend Setup
 
 Create and activate a virtual environment:
 
